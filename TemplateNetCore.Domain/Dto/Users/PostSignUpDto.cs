@@ -1,5 +1,4 @@
-﻿using TemplateNetCore.Domain.Enums.Users;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace TemplateNetCore.Domain.Dto.Users
 {
@@ -14,9 +13,5 @@ namespace TemplateNetCore.Domain.Dto.Users
         [Required]
         [MinLength(3)]
         public string Password { get; set; }
-
-        [Required]
-        [EnumDataType(typeof(UserRole))]
-        public UserRole Role { get; set; }
     }
 }

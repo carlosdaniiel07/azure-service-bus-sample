@@ -18,28 +18,22 @@ namespace TemplateNetCore.Repository.EF.Configurations.Users
 
             builder.Property(entity => entity.Name)
                 .HasColumnName("name")
-                .IsRequired()
-                .HasMaxLength(50);
+                .HasMaxLength(50)
+                .IsRequired();
 
             builder.Property(entity => entity.Email)
                 .HasColumnName("email")
-                .IsRequired()
-                .HasMaxLength(100);
+                .HasMaxLength(100)
+                .IsRequired();
 
             builder.Property(entity => entity.Password)
                 .HasColumnName("password")
-                .IsRequired()
-                .HasMaxLength(255);
-
-            builder.Property(entity => entity.Role)
-                .HasColumnName("role")
+                .HasMaxLength(255)
                 .IsRequired();
 
-            builder.Property(entity => entity.LastLogin)
-                .HasColumnName("last_login");
-
-            builder.Property(entity => entity.IsActive)
-                .HasColumnName("is_active")
+            builder.Property(entity => entity.Key)
+                .HasColumnName("key")
+                .HasColumnType("char(11)")
                 .IsRequired();
         }
     }

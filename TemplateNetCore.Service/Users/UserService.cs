@@ -65,8 +65,6 @@ namespace TemplateNetCore.Service.Users
             }
 
             user.Password = _hashService.Hash(user.Password);
-            user.LastLogin = null;
-            user.IsActive = true;
 
             await _unityOfWork.UserRepository.AddAsync(user);
             await _unityOfWork.CommitAsync();
