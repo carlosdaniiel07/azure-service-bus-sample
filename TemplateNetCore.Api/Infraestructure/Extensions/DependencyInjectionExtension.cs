@@ -1,20 +1,14 @@
-﻿using System.Text;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-
-using TemplateNetCore.Domain.Interfaces.Transactions;
+using System.Text;
 using TemplateNetCore.Domain.Interfaces.Users;
-
-using TemplateNetCore.Service.Transactions;
-using TemplateNetCore.Service.Users;
-
 using TemplateNetCore.Repository;
-using TemplateNetCore.Repository.Interfaces;
-
 using TemplateNetCore.Repository.EF;
 using TemplateNetCore.Repository.EF.Repositories;
+using TemplateNetCore.Repository.Interfaces;
+using TemplateNetCore.Service.Users;
 
 namespace TemplateNetCore.Api.Infraestructure.Extensions
 {
@@ -35,7 +29,6 @@ namespace TemplateNetCore.Api.Infraestructure.Extensions
 
         public static IServiceCollection AddTransientServices(this IServiceCollection services)
         {
-            services.AddTransient<ITransactionService, TransactionService>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IHashService, HashService>();
             services.AddTransient<ITokenService, TokenService>();

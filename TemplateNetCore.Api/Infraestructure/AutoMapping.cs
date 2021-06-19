@@ -1,7 +1,5 @@
 ﻿using AutoMapper;
-using TemplateNetCore.Domain.Dto.Transactions;
 using TemplateNetCore.Domain.Dto.Users;
-using TemplateNetCore.Domain.Entities.Transactions;
 using TemplateNetCore.Domain.Entities.Users;
 
 namespace TemplateNetCore.Api.Infraestructure
@@ -12,8 +10,6 @@ namespace TemplateNetCore.Api.Infraestructure
         {
             CreateMap<PostSignUpDto, User>();
             CreateMap<User, GetUserDto>();
-            CreateMap<PostTransactionDto, Transaction>();
-            CreateMap<Transaction, GetTransactionDto>();
         }
     }
 }
