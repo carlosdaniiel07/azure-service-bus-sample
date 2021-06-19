@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.SqlServer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -16,7 +17,7 @@ namespace TemplateNetCore.Api.Infraestructure.Extensions
     {
         public static void AddDbContext(this IServiceCollection services, string connectionString)
         {
-            services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(connectionString));
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
         }
 
         public static IServiceCollection AddScopedServices(this IServiceCollection services)

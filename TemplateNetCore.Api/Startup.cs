@@ -21,7 +21,7 @@ namespace TemplateNetCore.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext(Configuration.GetConnectionString("Local"));
+            services.AddDbContext(Configuration.GetConnectionString("Default"));
             services.AddScopedServices();
             services.AddTransientServices();
             services.AddHttpContextAccessor();
@@ -51,7 +51,7 @@ namespace TemplateNetCore.Api
             app.UseSwagger();
             app.UseSwaggerUI(options =>
             {
-                options.SwaggerEndpoint("/swagger/v1/swagger.json", "Template .NET Core");
+                options.SwaggerEndpoint("/swagger/v1/swagger.json", "Azure Service Bus Sample");
             });
 
             app.UseMiddleware<GlobalErrorHandlerMiddleware>();
