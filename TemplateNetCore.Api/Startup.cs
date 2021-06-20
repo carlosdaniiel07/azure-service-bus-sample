@@ -55,7 +55,7 @@ namespace TemplateNetCore.Api
                 options.SwaggerEndpoint("/swagger/v1/swagger.json", "Azure Service Bus Sample");
             });
 
-            //app.UseMiddleware<GlobalErrorHandlerMiddleware>();
+            app.UseMiddleware<GlobalErrorHandlerMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {
