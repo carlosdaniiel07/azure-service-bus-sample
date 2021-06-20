@@ -9,6 +9,8 @@ namespace TemplateNetCore.Domain.Interfaces.Users
     public interface IUserService
     {
         Task<User> GetById(Guid id);
+        Task<User> GetByKey(string key);
+        Task<string> GetKeyById(Guid id);
         Guid GetLoggedUserId(ClaimsPrincipal claims);
         Task<GetLoginResponseDto> Login(PostLoginDto postLoginDto);
         Task SignUp(User user);

@@ -1,14 +1,15 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.SqlServer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using TemplateNetCore.Domain.Interfaces.Transfers;
 using TemplateNetCore.Domain.Interfaces.Users;
 using TemplateNetCore.Repository;
 using TemplateNetCore.Repository.EF;
 using TemplateNetCore.Repository.EF.Repositories;
 using TemplateNetCore.Repository.Interfaces;
+using TemplateNetCore.Service.Transfers;
 using TemplateNetCore.Service.Users;
 
 namespace TemplateNetCore.Api.Infraestructure.Extensions
@@ -33,6 +34,8 @@ namespace TemplateNetCore.Api.Infraestructure.Extensions
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IHashService, HashService>();
             services.AddTransient<ITokenService, TokenService>();
+            services.AddTransient<ITransferService, TransferService>();
+            services.AddTransient<ITransferQueueService, TransferQueueService>();
 
             return services;
         }
@@ -62,6 +65,13 @@ namespace TemplateNetCore.Api.Infraestructure.Extensions
                     ValidateAudience = false,
                 };
             });
+
+            return services;
+        }
+
+        public static IServiceCollection AddHostedServices(this IServiceCollection services)
+        {
+            services.AddHostedService<TransferQueueConsumerService>();
 
             return services;
         }

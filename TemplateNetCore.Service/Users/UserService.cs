@@ -34,6 +34,16 @@ namespace TemplateNetCore.Service.Users
             return user;
         }
 
+        public async Task<User> GetByKey(string key)
+        {
+            return await _unityOfWork.UserRepository.GetAsync(user => user.Key == key);
+        }
+
+        public async Task<string> GetKeyById(Guid id)
+        {
+            return await _unityOfWork.UserRepository.GetKeyById(id);
+        }
+
         public Guid GetLoggedUserId(ClaimsPrincipal claims)
         {
             return _tokenService.GetIdByClaims(claims);
@@ -57,11 +67,18 @@ namespace TemplateNetCore.Service.Users
 
         public async Task SignUp(User user)
         {
-            var emailExists = await _unityOfWork.UserRepository.AnyAsync(user => user.Email == user.Email);
+            var emailExists = await _unityOfWork.UserRepository.AnyAsync(u => u.Email == user.Email);
 
             if (emailExists)
             {
                 throw new BusinessRuleException("Já existe um usuário com este e-mail");
+            }
+
+            var keyExists = await _unityOfWork.UserRepository.AnyAsync(u => u.Key == user.Key);
+
+            if (keyExists)
+            {
+                throw new BusinessRuleException("Já existe um usuário com esta chave");
             }
 
             user.Password = _hashService.Hash(user.Password);

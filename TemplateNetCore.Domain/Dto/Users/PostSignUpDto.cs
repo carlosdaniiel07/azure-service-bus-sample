@@ -13,5 +13,9 @@ namespace TemplateNetCore.Domain.Dto.Users
         [Required]
         [MinLength(3)]
         public string Password { get; set; }
+
+        [Required]
+        [StringLength(11, MinimumLength = 11)]
+        public string Key { get; set; }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using System.Threading.Tasks;
+using TemplateNetCore.Repository.EF.Repositories.Transfers;
 using TemplateNetCore.Repository.EF.Repositories.Users;
+using TemplateNetCore.Repository.Interfaces.Transfers;
 using TemplateNetCore.Repository.Interfaces.Users;
 
 namespace TemplateNetCore.Repository.EF
@@ -8,7 +10,8 @@ namespace TemplateNetCore.Repository.EF
     {
         private readonly ApplicationDbContext context;
 
-        private UserRepository _userRepository;
+        private UserRepository userRepository;
+        private TransferRepository transferRepository;
 
         public UnitOfWork(ApplicationDbContext context)
         {
@@ -19,12 +22,25 @@ namespace TemplateNetCore.Repository.EF
         {
             get
             {
-                if (_userRepository == null)
+                if (userRepository == null)
                 {
-                    _userRepository = new UserRepository(context);
+                    userRepository = new UserRepository(context);
                 }
 
-                return _userRepository;
+                return userRepository;
+            }
+        }
+
+        public ITransferRepository TransferRepository
+        {
+            get
+            {
+                if (transferRepository == null)
+                {
+                    transferRepository = new TransferRepository(context);
+                }
+
+                return transferRepository;
             }
         }
 
